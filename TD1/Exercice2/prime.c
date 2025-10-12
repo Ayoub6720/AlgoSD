@@ -4,16 +4,13 @@ int prime(int n){
 if (n < 2) return 0;
 int compt = 0;
 
-
 for (int i = 2; i <= n; i++) {
     int is_p = 1;
     for (int j = 2; j< i; j += 1) {
         if (i % j == 0) { 
             is_p = 0; 
             break; }}
-
     if (is_p) compt+=1;}
-
     return compt;
 }
 
