@@ -6,17 +6,45 @@
 
 int main(void)
 {
+    clock_t start, end;
     
-    int arr1[] = {1, 2, 3, 4, 5};           // trié
-    int arr2[] = {5, 4, 3, 2, 1};           // décroissant
-    int arr3[] = {2, 2, 3, 3, 4, 4};        // trié (non décroissant)
-    int arr4[] = {1, 3, 2, 4, 5};           // pas trié
-    int arr5[] = {42};                      // un seul élément
-    int arr6[] = {};                        // vide (possible si tu veux tester ça)
+    int n = 100000000;  
+    int *arr = (int *)malloc(n * sizeof(int));
 
-    if (is_sorted_nondecreasing(arr1,5)){
-    printf("recherche jump: %i\n",jump_search(arr1,5,5));}
-    else printf("recherche lineaire: %i\n",linear_search(arr1,5,10));
+    for (int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+    }
+
+    int* liste=arr;
+    int target=53283637;
+    int taille=n;
+
+    if (is_sorted_nondecreasing(liste,5)){
+
+        start = clock();
+        int i_jump =jump_search(liste,taille,target);
+        end = clock();
+        double time_jump =(double)(end-start)/CLOCKS_PER_SEC;
+
+        start = clock();
+        int i_binary =binary_search(liste,taille,target);
+        end = clock();
+        double time_binary =(double)(end-start)/CLOCKS_PER_SEC;
+
+
+
+        printf("recherche jump en %f secondes: %i\n",time_jump,i_jump);
+        printf("recherche binaire en %f secondes: %i\n",time_binary,i_binary);}
+
+
+    else{
+
+        start = clock();
+        int i_lin =linear_search(liste,taille,target);
+        end = clock();
+        double time_lin =(double)(end-start)/CLOCKS_PER_SEC;
+
+        printf("recherche lineaire en %f secondes: %i\n",time_lin,i_lin);}
     return 0;
 }
 
